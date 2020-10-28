@@ -1,64 +1,90 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
-  Card,
-  Button,
-  CardContent,
-  Grid,
-  TextField,
-} from "@material-ui/core";
-import { getB2s } from "../functions/axios";
-
+    CardTitle,
+    CardText,
+    Row,
+    Col,
+    Button,
+    Card,
+    Input,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+} from "reactstrap";
+import "../App.css";
+import { getB2s } from "./function";
+import post from './pamground.png';
 
 export default function Page1() {
-  const [bit2string, setBit2string] = useState(111111111111111);
-  const [result, setResult] = useState("");
-  const generate = () => {
-    getB2s(bit2string).then((res) => {
-      setResult(res);
-    });
-  };
-  return (
-    <React.Fragment>
-      <div class="container text-center" style={{ marginTop: "80px" }}>
-        <h1>บทที่ 1 Basic Computing</h1>
-      </div>
-      <div>
+    const [bit2string, setBit2string] = useState('01111000000001010000001100000000');
+    const [result, setResult] = useState("");
+    const generate = () => {
+        getB2s(bit2string).then((res) => {
+            setResult(res);
+        });
+    };
 
-        <Card style={{ marginTop: "250px", width: "1200px" }} class="container text-center">
-          <CardContent>
-            <Grid container spacing={3} alignItems="flex-end">
-              <Grid item xs={12} sm={6} md={6}>
-                <TextField
-                  id="outlined-basic"
-                  value={bit2string}
-                  label="กรอกเลขฐานสอง"
-                  variant="outlined"
-                  onChange={(e) => setBit2string(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={6}>
-                <TextField
-                  id="outlined-read-only-input"
-                  label="ผลลัพธ์"
-                  value={result === "" ? "" : result}
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  variant="outlined"
-                />
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Card>
 
-        <div class="container text-center">
+    return (
+        <div class="body" >
+            <header className="App-header">
+                <Row>
+                    <Col>
+                        {<Row style={{ marginTop: "15%" }}>
+                            <Col sm="2"></Col>
+                            <Col sm="8">
+                                <div className="text-center">
+                                    <h2 style={{marginLeft:"20px"}}>
+                                        Basic Computing
+                                    </h2>
+                                </div>
+                                <div className="text-center">
+                                    <p >exam: 01111000000001010000001100000000</p>
+                                </div>
+                                <div className="text-center">
+                                    <Row>
 
-          <Button variant="contained" color="primary" disableElevation onClick={generate}>
-            generate
-                  </Button>
+                                        <Col>
+                                            <Input
+                                                style={{
+                                                    marginTop: "20px",
+                                                    marginBottom: "20px",
+                                                    width: 400,
+                                                }}
+                                                value={bit2string}
+                                                type="text"
+                                                name="bit2string"
+                                                id="bit2string"
+                                                onChange={(e) => setBit2string(e.target.value)}
+                                            />
+                                            <h4>Result : {result}</h4><br />
+                                            <Row style={{ marginBottom: "30px" }}>
+                                                <Col sm="8">
+                                                    <Button onClick={generate} color="primary">
+                                                        <div style={{ width: 100 }}>
+                                                            <h3 style={{ marginTop: "10px" }}>submit</h3>
+                                                        </div>
+                                                    </Button>
+                                                </Col>
+                                          
+                                            </Row>
+                                        </Col>
+                                        <Col sm="2"></Col>
+                                    </Row>
+                                </div>
+                            </Col>
+                            <Col sm="2"></Col>
+                        </Row>}
+                    </Col>
+
+                    <Col>
+                    <div style={{ marginLeft: "200px" }}>
+                            <img src={post} />
+                        </div>
+                    </Col>
+
+                </Row>
+            </header>
         </div>
-      </div>
-    </React.Fragment>
-  )
+    );
 }

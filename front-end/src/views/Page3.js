@@ -1,194 +1,276 @@
 import React, { useState } from "react";
-
 import {
-  Button,
-  CardActions,
-  CardContent,
-  Grid,
-  TextField,
-} from "@material-ui/core";
-import { getInterpolation } from "../functions/axios";
+    CardTitle,
+    CardText,
+    Row,
+    Col,
+    Button,
+    Card,
+    Input,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+} from "reactstrap";
+import "../App.css";
+
+import { getInterpolation } from "./function";
+import post from './pamground.png';
+
+function Number5() {
+   
+    const [x, setx] = useState('5');
+    const [xi1, setxi1] = useState('0');
+    const [xi2, setxi2] = useState('8');
+    const [xi3, setxi3] = useState('14');
+    const [xi4, setxi4] = useState('20');
+    const [xi5, setxi5] = useState('23');
+    const [xi6, setxi6] = useState('30');
+    const [yi1, setyi1] = useState('0');
+    const [yi2, setyi2] = useState('50');
+    const [yi3, setyi3] = useState('96');
+    const [yi4, setyi4] = useState('110');
+    const [yi5, setyi5] = useState('13');
+    const [yi6, setyi6] = useState('88');
+
+    const [result, setresult] = useState();
 
 
-export default function Page3() {
-  const [x, setx] = useState(5);
-  const [xi1, setxi1] = useState(0);
-  const [xi2, setxi2] = useState(8);
-  const [xi3, setxi3] = useState(14);
-  const [xi4, setxi4] = useState(20);
-  const [xi5, setxi5] = useState(23);
-  const [xi6, setxi6] = useState(30);
-  const [yi1, setyi1] = useState(0);
-  const [yi2, setyi2] = useState(50);
-  const [yi3, setyi3] = useState(96);
-  const [yi4, setyi4] = useState(110);
-  const [yi5, setyi5] = useState(100);
-  const [yi6, setyi6] = useState(86);
 
-  const [result, setresult] = useState("");
+    const generate = () => {
+        const data = {
+            x: x,
+            xi: [xi1, xi2, xi3, xi4, xi5, xi6],
+            yi: [yi1, yi2, yi3, yi4, yi5, yi6]
 
-  const generate = () => {
-    const data = {
-      x: x,
-      xi: [xi1, xi2, xi3, xi4, xi5, xi6],
-      yi: [yi1, yi2, yi3, yi4, yi5, yi6],
+        };
+        getInterpolation(data).then((res) => {
+            setresult(`วิที่ ${x} มีความเร็วประมาณ ${res}`)
+        });
     };
-    getInterpolation(data).then((res) => {
-      setresult(`วินาทีที่ ${x} จะมีความเร็วประมาณ ${res}`);
-    });
-  };
 
-  return (
-    <React.Fragment>
-      <div class="container text-center" style={{marginTop:"80px"}}>
-        <h1>บทที่ 3 Interpolation</h1>
-      </div>
-      <div class="container text-center" style={{marginTop:"80px"}}>
-        <CardContent>
-          <Grid container spacing={3} alignItems="flex-end">
-            <Grid item xs={12} sm={12} md={12}>
-              <TextField
-                id="outlined-basic"
-                label="t"
-                value={x}
-                variant="outlined"
-                onChange={(e) => setx(e.target.value)}
-              />
-            </Grid>
+    return (
+        <div>
+            <header className="App-header">
+                <Row>
+                    <Col>
+                        <div className="text-center">
+                            <h2 style={{ marginTop: "20px", marginRight: "20px" }}>Interpolation</h2>
+                        </div>
+                        <div className="text-center">
+                            <p>exam:</p>
+                            <p>t = 5</p>
+                            <p>x = [ 0, 8, 14, 20, 23, 30 ]</p>
+                            <p>y = [ 0, 50, 96, 110, 13, 88 ]</p>
+                        </div>
 
-            <Grid item xs={12} sm={2} md={2}>
-              <TextField
-                id="outlined-basic"
-                label="x1"
-                value={xi1}
-                variant="outlined"
-                onChange={(e) => setxi1(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={2} md={2}>
-              <TextField
-                id="outlined-basic"
-                label="x2"
-                value={xi2}
-                variant="outlined"
-                onChange={(e) => setxi2(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={2} md={2}>
-              <TextField
-                id="outlined-basic"
-                label="x3"
-                value={xi3}
-                variant="outlined"
-                onChange={(e) => setxi3(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={2} md={2}>
-              <TextField
-                id="outlined-basic"
-                label="x4"
-                value={xi4}
-                variant="outlined"
-                onChange={(e) => setxi4(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={2} md={2}>
-              <TextField
-                id="outlined-basic"
-                label="x5"
-                value={xi5}
-                variant="outlined"
-                onChange={(e) => setxi5(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={2} md={2}>
-              <TextField
-                id="outlined-basic"
-                label="x6"
-                value={xi6}
-                variant="outlined"
-                onChange={(e) => setxi6(e.target.value)}
-              />
-            </Grid>
+                        <Row>
+                            <h3 style={{ marginTop: "20px", marginRight: "20px" }}>t :</h3>
+                            <Input
+                                style={{
+                                    marginTop: "20px",
+                                    marginBottom: "20px",
+                                    width: 60,
+                                }}
+                                value={x}
+                                onChange={(e) => setx(e.target.value)}
+                                type="text"
+                                name="bit2string"
+                                id="bit2string"
+                            />
+                        </Row>
 
-            <Grid item xs={12} sm={2} md={2}>
-              <TextField
-                id="outlined-basic"
-                label="y1"
-                value={yi1}
-                variant="outlined"
-                onChange={(e) => setyi1(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={2} md={2}>
-              <TextField
-                id="outlined-basic"
-                label="y2"
-                value={yi2}
-                variant="outlined"
-                onChange={(e) => setyi2(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={2} md={2}>
-              <TextField
-                id="outlined-basic"
-                label="y3"
-                value={yi3}
-                variant="outlined"
-                onChange={(e) => setyi3(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={2} md={2}>
-              <TextField
-                id="outlined-basic"
-                label="y4"
-                value={yi4}
-                variant="outlined"
-                onChange={(e) => setyi4(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={2} md={2}>
-              <TextField
-                id="outlined-basic"
-                label="y5"
-                value={yi5}
-                variant="outlined"
-                onChange={(e) => setyi5(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={2} md={2}>
-              <TextField
-                id="outlined-basic"
-                label="y6"
-                value={yi6}
-                variant="outlined"
-                onChange={(e) => setyi6(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={12} md={12}>
-              <TextField
-              style={{width:"350px"}}
-                id="outlined-read-only-input"
-                label="ผลลัพธ์"
-                value={result === "" ? "" : result}
-                InputProps={{
-                  readOnly: true,
-                }}
-                variant="outlined"
-              />
-            </Grid>
-          </Grid>
-        </CardContent>
-        <CardActions>
-        </CardActions>
-        <div class="container text-center">
 
-<Button variant="contained" color="primary" disableElevation onClick={generate}>
-  generate
-        </Button>
-</div>
+                        <Row>
+                            <h3 style={{ marginTop: "20px", marginRight: "20px" }}>
+                                xi :
+                                        </h3>
 
-      </div>
-    </React.Fragment>
-  )
+                            <Input
+                                style={{
+                                    marginTop: "20px",
+                                    marginBottom: "20px",
+                                    width: 60,
+                                }}
+                                value={xi1}
+                                onChange={(e) => setxi1(e.target.value)}
+                                type="text"
+                                name="bit2string"
+                                id="bit2string"
+                            />
+                            <Input
+                                style={{
+                                    marginLeft: "20px",
+                                    marginTop: "20px",
+                                    marginBottom: "20px",
+                                    width: 60,
+                                }}
+                                value={xi2}
+                                onChange={(e) => setxi2(e.target.value)}
+                                type="text"
+                                name="bit2string"
+                                id="bit2string"
+                            />
+                            <Input
+                                style={{
+                                    marginLeft: "20px",
+                                    marginTop: "20px",
+                                    marginBottom: "20px",
+                                    width: 60,
+                                }}
+                                value={xi3}
+                                onChange={(e) => setxi3(e.target.value)}
+                                type="text"
+                                name="bit2string"
+                                id="bit2string"
+                            />
+                            <Input
+                                style={{
+                                    marginLeft: "20px",
+                                    marginTop: "20px",
+                                    marginBottom: "20px",
+                                    width: 60,
+                                }}
+                                value={xi4}
+                                onChange={(e) => setxi4(e.target.value)}
+                                type="text"
+                                name="bit2string"
+                                id="bit2string"
+                            />
+                            <Input
+                                style={{
+                                    marginLeft: "20px",
+                                    marginTop: "20px",
+                                    marginBottom: "20px",
+                                    width: 60,
+                                }}
+                                value={xi5}
+                                onChange={(e) => setxi5(e.target.value)}
+                                type="text"
+                                name="bit2string"
+                                id="bit2string"
+                            />
+                            <Input
+                                style={{
+                                    marginLeft: "20px",
+                                    marginTop: "20px",
+                                    marginBottom: "20px",
+                                    width: 60,
+                                }}
+                                value={xi6}
+                                onChange={(e) => setxi6(e.target.value)}
+                                type="text"
+                                name="bit2string"
+                                id="bit2string"
+                            />
+                        </Row>
+
+
+                        <Row>
+                            <h3 style={{ marginTop: "20px", marginRight: "20px" }}>
+                                yi :
+                                        </h3>
+
+                            <Input
+                                style={{
+                                    marginTop: "20px",
+                                    marginBottom: "20px",
+                                    width: 60,
+                                }}
+                                value={yi1}
+                                onChange={(e) => setyi1(e.target.value)}
+                                type="text"
+                                name="bit2string"
+                                id="bit2string"
+                            />
+                            <Input
+                                style={{
+                                    marginLeft: "20px",
+                                    marginTop: "20px",
+                                    marginBottom: "20px",
+                                    width: 60,
+                                }}
+                                value={yi2}
+                                onChange={(e) => setyi2(e.target.value)}
+                                type="text"
+                                name="bit2string"
+                                id="bit2string"
+                            />
+                            <Input
+                                style={{
+                                    marginLeft: "20px",
+                                    marginTop: "20px",
+                                    marginBottom: "20px",
+                                    width: 60,
+                                }}
+                                value={yi3}
+                                onChange={(e) => setyi3(e.target.value)}
+                                type="text"
+                                name="bit2string"
+                                id="bit2string"
+                            />
+                            <Input
+                                style={{
+                                    marginLeft: "20px",
+                                    marginTop: "20px",
+                                    marginBottom: "20px",
+                                    width: 60,
+                                }}
+                                value={yi4}
+                                onChange={(e) => setyi4(e.target.value)}
+                                type="text"
+                                name="bit2string"
+                                id="bit2string"
+                            />
+                            <Input
+                                style={{
+                                    marginLeft: "20px",
+                                    marginTop: "20px",
+                                    marginBottom: "20px",
+                                    width: 60,
+                                }}
+                                value={yi5}
+                                onChange={(e) => setyi5(e.target.value)}
+                                type="text"
+                                name="bit2string"
+                                id="bit2string"
+                            />
+                            <Input
+                                style={{
+                                    marginLeft: "20px",
+                                    marginTop: "20px",
+                                    marginBottom: "20px",
+                                    width: 60,
+                                }}
+                                value={yi6}
+                                onChange={(e) => setyi6(e.target.value)}
+                                type="text"
+                                name="bit2string"
+                                id="bit2string"
+                            />
+                        </Row>
+
+                        <h4 style={{ marginBottom: "10px" }}>Result: {result}</h4>
+                        <div style={{marginLeft:"100px"}}>
+                            <Button onClick={generate} color="primary">
+                                <div style={{ width: 100 }}>
+                                    <h3 style={{ marginTop: "10px" }}>submit</h3>
+                                </div>
+                            </Button>
+                         
+                        </div>
+                    </Col>
+
+                    <Col>
+                        <div style={{ marginLeft: "200px" }}>
+                            <img src={post} />
+                        </div>
+                    </Col>
+                </Row>
+
+
+            </header>
+        </div>
+    );
 }
+
+export default Number5;

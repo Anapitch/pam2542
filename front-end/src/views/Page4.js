@@ -1,80 +1,111 @@
-
 import React, { useState } from "react";
 import {
-  Button,
-  CardActions,
-  CardContent,
-  Grid,
-  TextField,
-} from "@material-ui/core";
-import { getDifferentiation } from "../functions/axios";
+    CardTitle,
+    CardText,
+    Row,
+    Col,
+    Button,
+    Card,
+    Input,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+} from "reactstrap";
+import "../App.css";
 
+import { getDifferentiation } from "./function";
+import post from './pamground.png';
 
-export default function Page4() {
-  const [h, seth] = useState(0.64);
-  const [p, setp] = useState(2);
+export default function Page4(){
+    const [h, seth] = useState('0.64');
+    const [p, setp] = useState('2');
 
-  const [result, setresult] = useState("");
+    const [result, setresult] = useState();
 
-  const generate = () => {
-    const data = {
-      h: h,
-      p: p
+    const generate = () => {
+        const data = {
+            h: h,
+            p: p
 
+        };
+        getDifferentiation(data).then((res) => {
+            setresult(res)
+        });
     };
-    getDifferentiation(data).then((res) => {
-      setresult(res)
-    });
-  };
-  return (
 
-    <React.Fragment>
-      <div class="container text-center" style={{marginTop:"80px"}}>
-        <h1>บทที่ 4 Differentiation</h1>
-      </div>
-      <div class="container text-center" style={{marginTop:"120px"}}>
-        <CardContent>
-          <Grid container spacing={3} alignItems="flex-end">
-            <Grid item xs={12} sm={6} md={6}>
-              <TextField
-                id="outlined-basic"
-                value={h}
-                label="ค่า H"
-                variant="outlined"
-                onChange={(e) => seth(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={6}>
-              <TextField
-                id="outlined-basic"
-                value={p}
-                label="ค่า P"
-                variant="outlined"
-                onChange={(e) => setp(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={12} md={12}>
-              <TextField
-                id="outlined-read-only-input"
-                label="ผลลัพธ์"
-                value={result === "" ? "" : result}
-                InputProps={{
-                  readOnly: true,
-                }}
-                variant="outlined"
-              />
-            </Grid>
-          </Grid>
-        </CardContent>
-        <CardActions>
-        </CardActions>
-        <div class="container text-center">
+    return (
+        <div>
+            <header className="App-header">
+                <Row>
+                    <Col>
+                        <div className="text-center">
+                            <h2 style={{ marginTop: "20px", marginRight: "20px" }}>
+                                Differentiation
+                                </h2>
+                        </div>
+                        <div className="text-center">
+                            <p>exam:</p>
+                            <p>h = 0.64</p>
+                            <p>p = 2</p>
+                        </div>
 
-          <Button variant="contained" color="primary" disableElevation onClick={generate}>
-            generate
-</Button>
+                        <div className="text-center">
+                            <Row>
+                                <h3 style={{ marginTop: "20px", marginLeft: "50px" }}>h : </h3>
+                                <Input
+                                    style={{
+                                        marginLeft: "20px",
+                                        marginTop: "20px",
+                                        marginBottom: "20px",
+                                        width: 100,
+                                    }}
+                                    value={h}
+                                    onChange={(e) => seth(e.target.value)}
+                                    type="text"
+                                    name="bit2string"
+                                    id="bit2string"
+                                />
+                            </Row>
+                            <Row>
+                                <h3 style={{ marginTop: "20px", marginLeft: "50px" }}>p :</h3>
+                                <Input
+                                    style={{
+                                        marginLeft: "20px",
+                                        marginTop: "20px",
+                                        marginBottom: "20px",
+                                        width: 100,
+                                    }}
+                                    value={p}
+                                    onChange={(e) => setp(e.target.value)}
+                                    type="text"
+                                    name="bit2string"
+                                    id="bit2string"
+                                />
+                            </Row>
+                        </div>
+
+                        <h4 style={{ marginBottom: "10px" }}>Result : {result}</h4>
+
+                        <Button onClick={generate} color="primary">
+                            <div style={{ width: 100 }}>
+                                <h3 style={{ marginTop: "10px"}}>submit</h3>
+                            </div>
+                        </Button>
+
+                    </Col>
+
+                    <Col>
+                        <div style={{ marginLeft: "200px" }}>
+                            <img src={post} />
+                        </div>
+                    </Col>
+
+
+
+
+                </Row>
+
+            </header>
         </div>
-      </div>
-    </React.Fragment>
-  )
+    );
 }

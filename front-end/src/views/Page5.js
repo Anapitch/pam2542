@@ -1,81 +1,108 @@
+
 import React, { useState } from "react";
 import {
-  Button,
-  CardActions,
-  CardContent,
-  Grid,
-  TextField,
-} from "@material-ui/core";
-import { getIntegration } from "../functions/axios";
+    CardTitle,
+    CardText,
+    Row,
+    Col,
+    Button,
+    Card,
+    Input,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+} from "reactstrap";
+import "../App.css";
+
+import { getIntegration } from "./function";
+import post from './pamground.png';
+
+function Number4() {
 
 
-export default function Page5() {
+    const [result, setresult] = useState();
+    const [a, seta] = useState('0');
+    const [b, setb] = useState('3');
 
-  const [result, setresult] = useState("");
-  const [a, seta] = useState(0);
-  const [b, setb] = useState(3);
-
-  const generate = () => {
-    const data = {
-      a: a,
-      b: b,
+    const generate = () => {
+        const data = {
+            a: a,
+            b: b,
+        };
+        getIntegration(data).then((res) => {
+            setresult(res);
+        });
     };
-    getIntegration(data).then((res) => {
-      setresult(res);
-    });
-  };
-  return (
+    return (
+        <div>
+            <header className="App-header">
+                <Row>
+                    <Col>
+                        <div className="text-center">
+                            <h2 style={{ marginTop: "20px", marginRight: "20px" }}>
+                                Integration
+                                </h2>
+                        </div>
+                        <div className="text-center">
+                            <p>exam:</p>
+                            <p>a = 0</p>
+                            <p>b = 3</p>
+                        </div>
 
-    <React.Fragment>
-      <div class="container text-center" style={{marginTop:"80px"}}>
-        <h1>บทที่ 5 Integration</h1>
-      </div>
-      <div>
+                        <div className="text-center">
+                            <Row>
+                                <h3 style={{ marginTop: "20px", marginLeft: "50px" }}>a :</h3>
+                                <Input
+                                    style={{
+                                        marginLeft: "10px",
+                                        marginTop: "20px",
+                                        marginBottom: "20px",
+                                        width: 100,
+                                    }}
+                                    value={a}
+                                    onChange={(e) => seta(e.target.value)}
+                                    type="text"
+                                    name="bit2string"
+                                    id="bit2string"
+                                />
+                            </Row>
+                            <Row>
+                                <h3 style={{ marginTop: "20px", marginLeft: "50px" }}>b :</h3>
+                                <Input
+                                    style={{
+                                        marginLeft: "10px",
+                                        marginTop: "20px",
+                                        marginBottom: "20px",
+                                        width: 100,
+                                    }}
+                                    value={b}
+                                    onChange={(e) => setb(e.target.value)}
+                                    type="text"
+                                    name="bit2string"
+                                    id="bit2string"
+                                />
+                            </Row>
+                        </div>
+                        <h4 style={{ marginBottom: "10px" }}>Result: {result}</h4>
+                        <div>
+                            <Button onClick={generate} color="primary">
+                                <div style={{ width: 100 }}>
+                                    <h3 style={{ marginTop: "10px" }}>submit</h3>
+                                </div>
+                            </Button>
+                          
+                        </div>
+                    </Col>
 
 
-        <CardContent class="container text-center" style={{marginTop:"180px"}}>
-          <Grid container spacing={3} alignItems="flex-end">
-            <Grid item xs={12} sm={6} md={6}>
-              <TextField
-                id="outlined-basic"
-                value={a}
-                label="ค่า A"
-                variant="outlined"
-                onChange={(e) => seta(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={6}>
-              <TextField
-                id="outlined-basic"
-                value={b}
-                label="ค่า B"
-                variant="outlined"
-                onChange={(e) => setb(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={12} md={12}>
-              <TextField
-                id="outlined-read-only-input"
-                label="ผลลัพธ์"
-                value={result === "" ? "" : result}
-                InputProps={{
-                  readOnly: true,
-                }}
-                variant="outlined"
-              />
-            </Grid>
-          </Grid>
-        </CardContent>
-        <CardActions>
-        </CardActions>
-        <div class="container text-center">
-
-          <Button variant="contained" color="primary" disableElevation onClick={generate}>
-            generate
-</Button>
+                    <Col>
+                        <div style={{ marginLeft: "200px" }}>
+                            <img src={post} />
+                        </div>
+                    </Col>
+                </Row>
+            </header>
         </div>
-
-      </div>
-    </React.Fragment>
-  )
+    );
 }
+export default Number4;
